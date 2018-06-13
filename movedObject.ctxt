@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=movedObject
+comment1.params=nimages\ nx\ ny
+comment1.target=movedObject(java.lang.String[],\ int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ movedObject\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=steps\ degrees
+comment3.target=int[]\ getNewPosition(double,\ int)
+comment4.params=steps
+comment4.target=void\ move(int)
+numComments=5
