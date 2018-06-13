@@ -9,4 +9,6 @@ comment3.params=steps\ degrees
 comment3.target=int[]\ getNewPosition(double,\ int)
 comment4.params=steps
 comment4.target=void\ move(int)
-numComments=5
+comment5.params=
+comment5.target=int[]\ getPosition()
+numComments=6

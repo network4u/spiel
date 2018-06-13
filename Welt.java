@@ -157,7 +157,7 @@ public class Welt extends World
         addObject(lebensAnzeige, 800, 40);
 
         levelErstellen();
-        //addObject(new attacking(getWidth()/4, getHeight()/4), getWidth()/4, getHeight()/4);
+        addObject(new attacking(getWidth()/4, getHeight()/4), getWidth()/4, getHeight()/4);
 
         menue.setSpielZustand("Spielen");
     }
@@ -332,9 +332,11 @@ public class Welt extends World
         menue.setSpielZustand("Profil");
     }
 
-    public void newshot(shot make , int newx, int newy){
+    public void newshot(int[] apos, int rotation){
+        shot make= new shot(apos,rotation);
+        int[] position = make.getPosition();
         shots.add(make);
-        addObject(make, newx, newy);
+        addObject(make, position[0], position[1]);
     }
 
     /**

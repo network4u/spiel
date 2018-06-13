@@ -13,10 +13,11 @@ public class shot extends movedObject
     /**
      * Constructor for objects of class shot
      */
-    public shot(int rotation,int[] npos)
+    public shot(int[] npos, int rotation)
     {
         super(new String[] {"Schuesse.png",},npos[0],npos[1]);
         this.setRotation(rotation);
+        this.setstate("setup");
         flew = 0;
         speed= 10;
         
@@ -24,7 +25,7 @@ public class shot extends movedObject
     
     public void act(){
         super.act();
-        if(getWorld().menue.getSpielZustand().equals("Spielen")){
+        if(this.isstate("g_Spielen")){
             try{
                 this.move(speed);
             }catch(java.lang.NullPointerException error){
@@ -35,6 +36,12 @@ public class shot extends movedObject
                 this.setstate("dead");
                 getWorld().removeObject(this);
             }
+        }else if(this.isstate("setup")){
+            this.move(100);
+            this.setstate("g_Spielen");
+        }
+        if(this.state_startswith("g_")){
+            this.setstate(getWorld().menue.getSpielZustand());
         }
     }
 

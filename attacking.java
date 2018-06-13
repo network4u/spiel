@@ -31,7 +31,7 @@ public class attacking extends movedObject
             java.util.List<Flugzeug> actors;
             actors= this.getObjectsInRange(20,Flugzeug.class);
             if(actors.size()==0){
-                this.shoot(1);
+                this.shoot();
             }
             if(getOneIntersectingObject(shot.class)!=null){
                 this.touched();
@@ -46,15 +46,9 @@ public class attacking extends movedObject
         this.setstate("dead");
     }
     
-    public void shoot(int number){
-        Welt myworld= getWorld();
-        shot newshot;
-        for(int i=0; i<number; i++){
-            int [] newpos = getNewPosition(100,this.getRotation());
-            newshot= new shot(this.getRotation(),newpos);
-            myworld.newshot(newshot,newpos[0],newpos[1]);
-        }
-        getWorld().menue.schussGeraeusch();
+    public void shoot(){
+        getWorld().newshot(this.getPosition(),this.getRotation());
+        
     }
     
     public void turntoplain(){
