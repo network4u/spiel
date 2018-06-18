@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Propeller
+comment0.text=\r\n\ Propeller\ sorgt\ f\u00FCr\ die\ Animation\ des\ Propellers\ des\ Flugzeuges.\r\n\ \r\n\ @author\ (Jonas\ Wischeropp,\ Julius\ Schreiber)\ \r\n\ @version\ (5.Mai.2018)\r\n
+comment1.params=f\ m
+comment1.target=Propeller(Flugzeug,\ Menue)
+comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Propeller\r\n\ @param\ f\ Referenz\ aufs\ Flugzeug\r\n\ @param\ m\ Referenz\ aufs\ Menue\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Whileschleife\ die\ l\u00E4uft\ wenn\ der\ Runn-Knopf\ gedr\u00FCckt\ wurde\r\n\ und\ in\ die\ alles\ geschrieben\ werden\ muss\ was\ ausgef\u00FChrt\ werden\ soll..\r\n
+comment3.params=
+comment3.target=void\ propellerFolgt()
+comment3.text=\r\n\ Sorgt\ daf\u00FCr,\ dass\ sich\ Propeller\ an\ der\ gleichen\ Stelle,\r\n\ wie\ Flugzeug\ befindet\ und\ die\ selbe\ ausrichtung\ hat.\r\n
+comment4.params=
+comment4.target=void\ propellerDrehen()
+comment4.text=\r\n\ Sorgt\ durch\ die\ Abfolge\ von\ Bildern\ f\u00FCr\ die\ Drehung\ des\ Propellers\r\n
+numComments=5

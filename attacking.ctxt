@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=attacking
+comment1.params=nx\ ny
+comment1.target=attacking(int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ movedObject\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ touched()
+comment4.params=
+comment4.target=void\ shoot()
+comment5.params=
+comment5.target=void\ turntoplain()
+numComments=6

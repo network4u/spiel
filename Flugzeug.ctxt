@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Flugzeug
+comment0.text=\r\n\ Flugzeug\ legt\ die\ Steureung\ der\ Flugzeuge\ im\ Spiel\ fest\ (Bots\ und\ Spieler).\r\n\ \r\n\ @author\ (Jonas\ Wischeropp,\ Julius\ Schreiber)\ \r\n\ @version\ (5.Mai.2018)\r\n
+comment1.params=l\ m
+comment1.target=Flugzeug(LebensAnzeige,\ Menue)
+comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Flugzeug\r\n\ @param\ l\ Referenz\ auf\ die\ Lebensanzeige\r\n\ @param\ m\ Referenz\ aufs\ Menue\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Whileschleife\ die\ l\u00E4uft\ wenn\ der\ Runn-Knopf\ gedr\u00FCckt\ wurde\r\n\ und\ in\ die\ alles\ geschrieben\ werden\ muss\ was\ ausgef\u00FChrt\ werden\ soll.\r\n
+comment3.params=
+comment3.target=void\ steuerung()
+comment3.text=\r\n\ Legt\ die\ steuerung\ von\ Flugzeug\ fest\ um\ es\ zu\ bewegen.\r\n
+comment4.params=
+comment4.target=int\ getGeschwindigkeit()
+comment4.text=\r\n\ Getter\ der\ es\ erm\u00F6glicht\ die\ Geschwindigkeit\ des\ Flugzeugs\ zu\ erfahren.\ \r\n
+comment5.params=skin
+comment5.target=void\ skinWaehlen(int)
+comment5.text=\r\n\ Legt\ den\ Skin\ (das\ Aussehen)\ des\ Flugzeugs\ fest.\r\n\ @param\ skin\ Nummer\ des\ kins/\ Aussehens\r\n
+numComments=6
