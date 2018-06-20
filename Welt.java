@@ -332,8 +332,8 @@ public class Welt extends World
         menue.setSpielZustand("Profil");
     }
 
-    public void newshot(int[] apos, int rotation){
-        shot make= new shot(apos,rotation);
+    public void newshot(int[] apos, int rotation, Actor from){
+        shot make= new shot(apos,rotation,from);
         int[] position = make.getPosition();
         shots.add(make);
         addObject(make, position[0], position[1]);
