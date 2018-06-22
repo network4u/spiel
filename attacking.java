@@ -12,18 +12,23 @@ public class attacking extends movedObject
     private int delay;
     private String exploded;
     private Flugzeug flugzeug;
-    private int shotit;
+    private int lastshot;
+    private java.util.ArrayList<int[]> turnto;
     /**
      * Constructor for objects of class movedObject
      */
     public attacking(int nx,int ny)
     {
-        super(new String[] {"FlugzeugGegner1.png"},nx,ny);
+        super(new String[] {"FlugzeugGegner1.png","FlugzeugGegner2.png","FlugzeugGegner3.png","FlugzeugGegner4.png","FlugzeugGegner5.png"},nx,ny);
         exploded="Explosion.png";
         this.setstate("g_Spielen");
         this.speed = 1;
         this.delay = 5000;
-        shotit=1;
+        this.lastshot=1;
+        this.turnto= new java.util.ArrayList<int []>();
+        for( int i=0; i<50;i++){
+            turnto.add(new int[] {0,0});
+        }
     }
     
     public void act(){
@@ -61,18 +66,24 @@ public class attacking extends movedObject
     }
     
     public void shoot(){
-        if(this.shotit==0){
+        if(this.lastshot==0){
             getWorld().newshot(this.getPosition(),this.getRotation(),this);
-        }else{
-            this.shotit = (shotit+1)%20;
         }
+        this.lastshot = (lastshot+1)%100;
     }
     
     public void turntoplain(){
-        int plainx = getWorld().flugzeug.getX();
-        int plainy = getWorld().flugzeug.getY();
-        
-        this.turnTowards(plainx,plainy);
+        int plainx = getWorld().flugzeug.getX(); // stays always the same
+        int plainy = getWorld().flugzeug.getY(); // stays always the same
+        int myx = this.getX();
+        int myy = this.getY();
+        int relativx = plainx-myx;
+        int relativy = plainy-myy;
+        this.turnto.add( new int[] {relativx,relativy});
+        int [] oldPosition = this.turnto.remove(0);
+        int newTurnToX = oldPosition[0]+ myx;
+        int newTurnToY = oldPosition[1]+ myy;
+        this.turnTowards(newTurnToX,newTurnToY);
     }
 }
     

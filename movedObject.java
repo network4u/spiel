@@ -5,6 +5,8 @@ public class movedObject extends myActor
     // instance variables - replace the example below with your own
     private int[] position;
     private String[] imagelist;
+    private int actualImage;
+    private int propellerDrehgesch;
 
     /**
      * Constructor for objects of class movedObject
@@ -14,14 +16,17 @@ public class movedObject extends myActor
         super();
         this.imagelist = nimages;
         this.position = new int[] {nx,ny};
+        this.actualImage=0;
+        this.propellerDrehgesch=8;
     }
     
     public void act(){
         if(getWorld().menue.getSpielZustand().equals("Spielen")){
             this.setLocation(position[0],position[1]);
-            for(int i=0; i < this.imagelist.length; i++){
-                setImage(this.imagelist[i]);
-            }
+            this.actualImage= (this.actualImage + 1) % (this.imagelist.length * this.propellerDrehgesch);
+            double nextImage= (double) this.actualImage / (double) this.propellerDrehgesch;
+            setImage(this.imagelist[(int) nextImage]);
+            
         }
     }
     
@@ -42,11 +47,7 @@ public class movedObject extends myActor
     
     public void move(int steps){
         this.position = getNewPosition((double) steps,this.getRotation());
-        /**
-        System.out.println("-----------");
-        System.out.println(position[0]);
-        System.out.println(position[1]);
-        */
+        
     }
     
     public int[] getPosition(){

@@ -18,7 +18,7 @@ public class shot extends movedObject
      */
     public shot(int[] npos, int rotation, Actor from)
     {
-        super(new String[] {"Schuesse.png",},npos[0],npos[1]);
+        super(new String[] {"Explosion.png",},npos[0],npos[1]);
         this.setRotation(rotation);
         this.setstate("setup");
         flew = 0;
@@ -45,7 +45,7 @@ public class shot extends movedObject
             this.setstate("g_Spielen");
         }
         if(getstate().startsWith("g_")){
-            this.setstate(getWorld().menue.getSpielZustand());
+            this.setstate("g_"+getWorld().menue.getSpielZustand());
         }
     }
     
