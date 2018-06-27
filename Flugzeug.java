@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Flugzeug extends Actor
 {
-    int GESCHWINDIGKEIT;
     
     Menue menue;
     LebensAnzeige lebensAnzeige;
@@ -20,8 +19,6 @@ public class Flugzeug extends Actor
     public Flugzeug(LebensAnzeige l, Menue m){
         menue = m;
         lebensAnzeige = l;
-        
-        GESCHWINDIGKEIT = 2;
     }
     
      /**
@@ -53,10 +50,6 @@ public class Flugzeug extends Actor
             removeTouching(shot.class);
             lebensAnzeige.lebenAbziehen();
         }
-        
-        if(menue.getSpielZustand().equals("Verloren")){
-            menue.explosionsGeraeusch();
-        }
     }    
     
     /**
@@ -80,13 +73,6 @@ public class Flugzeug extends Actor
         if(Greenfoot.isKeyDown("s")){
             //Objekt Bombe Spawnen
         }
-    }
-    
-    /**
-     * Getter der es ermöglicht die Geschwindigkeit des Flugzeugs zu erfahren. 
-     */
-    public int getGeschwindigkeit(){
-        return GESCHWINDIGKEIT;
     }
     
     /**

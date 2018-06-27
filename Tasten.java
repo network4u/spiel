@@ -36,7 +36,9 @@ class Tasten extends Menue
             clickGeraeusch();
             
             if(tastenName.equals("AcceptTaste")){
-                welt().menueUndFlugzeug();
+                if(!menue.getName().equals("")){
+                    welt().menueUndFlugzeug();
+                }
             }
 
             if(tastenName.equals("BackTaste")){
@@ -66,8 +68,8 @@ class Tasten extends Menue
             }
             
             if(tastenName.equals("StartTaste")
-            || tastenName.equals("ResumeTaste")){
-                welt().spielErstellen();
+            || tastenName.equals("RestartTaste")){
+                welt().neuesSpielErstellen();
             }
             
             if(tastenName.equals("SkinLinksTaste")){
@@ -114,14 +116,14 @@ class Tasten extends Menue
                 welt().gegnerLoeschen();
                 welt().menueErstellen();
             }
-            
-            if(tastenName.equals("RestartTaste")){
-                welt().gegnerLoeschen();
-                welt().restart();
-            }
     
             if(tastenName.equals("NextTaste")){
+                welt().gegnerLoeschen();
                 welt().next();
+            }
+            
+            if(tastenName.equals("ResumeTaste")){
+                welt().spielErstellen();
             }
         }
 
@@ -139,7 +141,7 @@ class Tasten extends Menue
         // werden können.
         if(Greenfoot.isKeyDown("enter")){
             if(menue.getSpielZustand().equals("Menue")){
-                welt().spielErstellen();
+                welt().neuesSpielErstellen();
             }
             if(menue.getSpielZustand().equals("NamenWaehlen")){
                 welt().menueUndFlugzeug();

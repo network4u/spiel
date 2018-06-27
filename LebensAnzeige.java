@@ -32,7 +32,6 @@ public class LebensAnzeige extends Actor
     public void act() 
     {
         lebenAnzeigen();
-        
     }
     
     /**
@@ -57,7 +56,7 @@ public class LebensAnzeige extends Actor
     }
     
     /**
-     * Methode um die Anzahl der Leben anzuzeigen.
+     * Methode um ein Leben abzuziehen.
      */
     public void lebenAbziehen(){
         if(leben >= 2){
@@ -67,6 +66,15 @@ public class LebensAnzeige extends Actor
             if(menue.getSpielZustand().equals("Spielen")){
                 menue.setSpielZustand("Verloren");
             } 
+        }
+    }
+    
+    /**
+     * Methode um ein Leben hinzuzufügen.
+     */
+    public void lebenHinzufuegen(){
+        if(leben != 3){
+            setLeben(getLeben()+1);
         }
     }
 }

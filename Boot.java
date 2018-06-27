@@ -23,7 +23,7 @@ public class Boot extends Actor
      * @param y y-Position
      * @param r Ausrichtung/ Rotation des Bootes (möglich: 0, 90, 180, 270)
      * @param m Referenz aufs Menue
-     * @param bd Referenz auf den Boden
+     * @param bd Referenz auf den BodenDurchsichtig
      */
     public Boot(int x, int y, int r, Menue m, BodenDurchsichtig bd){
         xPosition = x;
@@ -52,7 +52,7 @@ public class Boot extends Actor
             setImage("Explosion.png");
             menue.explosionsGeraeusch();
             welt().bootListe.remove(this);
-            welt().bootListe.remove(getOneIntersectingObject(Geschuetz.class));
+
             removeTouching(Geschuetz.class);
             lebend = false;
         }
@@ -60,6 +60,7 @@ public class Boot extends Actor
         if(!lebend){
             counter++;
             if(counter == EXPLOSIONSLAENGE){
+                menue.abschuessePlus();
                 getWorld().removeObject(this);
             }
         }
