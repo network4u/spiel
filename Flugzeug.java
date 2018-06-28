@@ -11,7 +11,8 @@ public class Flugzeug extends Actor
     
     Menue menue;
     LebensAnzeige lebensAnzeige;
-    int lastshot;
+    int lastShot;
+    private int GESCHWINDIGKEIT;
     /**
      * Konstruktor der Klasse Flugzeug
      * @param l Referenz auf die Lebensanzeige
@@ -20,7 +21,7 @@ public class Flugzeug extends Actor
     public Flugzeug(LebensAnzeige l, Menue m){
         menue = m;
         lebensAnzeige = l;
-        lastshot=1;
+        lastShot=1;
         GESCHWINDIGKEIT = 2;
     }
     
@@ -56,9 +57,11 @@ public class Flugzeug extends Actor
         }
     }
     
-
+    /**
+     * Überprüft, ob das Objekt von einem fremden Schuss berührt wird. Falls dies der Fall ist, zieht es ein Leben ab und löscht den Schuss
+     */
     public void touched(){
-        java.util.List<shot> shots = getIntersectingObjects(shot.class);
+        java.util.List<Shot> shots = getIntersectingObjects(Shot.class);
         boolean hit= false;
         for(int i=0; i<shots.size();i++){
             if(!shots.get(i).isFrom((Actor) this)){
@@ -72,14 +75,17 @@ public class Flugzeug extends Actor
     }
     
     
+    /**
+     * Löst einen Schuss mit Position und Bewegungsrichtung des Flugzeuges aus
+     */
+    
     public void shoot(){
-        if(this.lastshot==0){
+        if(this.lastShot==0){
             int relX= this.getX() - getWorldOfType(Welt.class).bodenDurchsichtig.getX();
             int relY= this.getY() - getWorldOfType(Welt.class).bodenDurchsichtig.getY();
-            int[] posInt= new int[] {relX,relY};
-            getWorldOfType(Welt.class).newshot(posInt,this.getRotation(),this);
+            getWorldOfType(Welt.class).newShot(relX,relY,this.getRotation(),this);
         }
-        this.lastshot = (lastshot+1)%13;
+        this.lastShot = (lastShot+1)%13;
     }
 
     

@@ -18,12 +18,12 @@ public class Welt extends World
     BodenRot bodenRot = new BodenRot(boden);
     BodenDurchsichtig bodenDurchsichtig = new BodenDurchsichtig(boden, bodenRot,
             flugzeug, menue);
-    Schrift schrift = new Schrift(menue);
-    Schrift schrift2 = new Schrift(menue);
+    Schrift schrift = new Schrift(menue,"tut");
+    Schrift schrift2 = new Schrift(menue,"tut");
     Boot boot;
     Geschuetz geschuetz;
 
-    java.util.ArrayList<shot> shots;
+    java.util.ArrayList<Shot> shots;
     java.util.ArrayList<Tasten> tastenListe;
     java.util.ArrayList<Boot> bootListe;
     java.util.ArrayList<Geschuetz> geschuetzListe;
@@ -39,7 +39,7 @@ public class Welt extends World
         //Generiert eine neu Welt mit den Maßen 900 x 600 und der Pixelgröße 1.
         super(900, 600, 1, false); 
 
-        shots = new java.util.ArrayList<shot>();
+        shots = new java.util.ArrayList<Shot>();
         tastenListe = new java.util.ArrayList<Tasten>();
         bootListe = new java.util.ArrayList<Boot>();
         geschuetzListe = new java.util.ArrayList<Geschuetz>();
@@ -47,7 +47,7 @@ public class Welt extends World
         //Legt die Riehenfolge der verschieden Ebenen fest
         //(erstes = Oben, letzes = Unten).
         setPaintOrder(Tasten.class, Schrift.class, LebensAnzeige.class, Flugzeug.class,
-            Propeller.class, Menue.class, attacking.class, shot.class, Geschuetz.class,
+            Propeller.class, Menue.class, attacking.class, Shot.class, Geschuetz.class,
             Boot.class, Boden.class, BodenRot.class, BodenDurchsichtig.class);
 
         namesMenueErstellen();
@@ -150,7 +150,7 @@ public class Welt extends World
      * Ertellt alle Objekte die für die Oberfläche des Spiels wichtig sind
      * und setzt das Spieler Flugzeug richtig.
      */
-    public void spielErstellen(){
+    public void neuesSpielErstellen(){
         allesLoeschen();
         flugzeug.setLocation(getWidth()/2, getHeight()/2);
         lebensAnzeige.setLeben(3);
@@ -231,7 +231,7 @@ public class Welt extends World
      */
     public void restart(){
         menueErstellen();
-        spielErstellen();
+        neuesSpielErstellen();
     }
 
     /**
@@ -240,7 +240,7 @@ public class Welt extends World
     public void next(){
         menueErstellen();
         menue.setLevel(menue.getLevel()+1);
-        spielErstellen();
+        neuesSpielErstellen();
     }
 
     /**
@@ -331,7 +331,7 @@ public class Welt extends World
     public void newShot(int x, int y, int rotation, Actor from){
         
         menue.schussGeraeusch();
-        shot make= new Shot(x,y,rotation,from);
+        Shot make= new Shot(x,y,rotation,from);
         int[] position = make.getPosition();
         shots.add(make);
         addObject(make, position[0], position[1]);

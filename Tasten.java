@@ -123,7 +123,7 @@ class Tasten extends Menue
             }
             
             if(tastenName.equals("ResumeTaste")){
-                welt().spielErstellen();
+                welt().neuesSpielErstellen();
             }
         }
 

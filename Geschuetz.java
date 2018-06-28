@@ -33,12 +33,15 @@ public class Geschuetz extends Actor
          shoot();
     }  
     
-    
+    /**
+     * Löst einen Schuss mit Position und Richtung des Geschützes aus
+     */
     public void shoot(){
         if(this.lastshot==0){
             Welt welt = this.getWorldOfType(Welt.class);
-            int [] posList= new int[]{this.getX()-welt.bodenDurchsichtig.getX(),this.getY()-welt.bodenDurchsichtig.getY()};
-            welt.newshot(posList,this.getRotation(),this);
+            int relX = this.getX()-welt.bodenDurchsichtig.getX();
+            int relY = this.getY()-welt.bodenDurchsichtig.getY();
+            welt.newShot(relX,relY,this.getRotation(),this);
         }
         this.lastshot = (lastshot+1)%300;
     }

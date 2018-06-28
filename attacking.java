@@ -1,11 +1,10 @@
 /**
- * Write a description of class attacking here.
+ * Ein feindliches Flugzeug, das dem Spielerflugzeug flolgt und in vorgegebenen Intervallen Schüsse auslöst, wenn sich das Spielerflugzeug in der Nähe befindet
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Julius,Jonas
  */
 import greenfoot.*;
-public class attacking extends movedObject
+public class attacking extends MovedObject
 {
     // instance variables - replace the example below with your own
     private int speed;
@@ -15,13 +14,15 @@ public class attacking extends movedObject
     private int lastShot;
     private java.util.ArrayList<int[]> turnto;
     /**
-     * Constructor for objects of class movedObject
+     * Konstruktor der Klasse Attacking
+     * @param x Der X-Wert, auf dem sich das Objekt anfangs relativ zum Boden befinden soll
+     * @param y Der Y-Wert, auf dem sich das Objekt anfangs relativ zum Boden befinden soll
      */
-    public attacking(int nx,int ny)
+    public attacking(int x,int y)
     {
-        super(new String[] {"FlugzeugGegner1.png","FlugzeugGegner2.png","FlugzeugGegner3.png","FlugzeugGegner4.png","FlugzeugGegner5.png"},nx,ny);
+        super(new String[] {"FlugzeugGegner1.png","FlugzeugGegner2.png","FlugzeugGegner3.png","FlugzeugGegner4.png","FlugzeugGegner5.png"},x,y);
         this.exploded="Explosion.png";
-        this.setstate("g_Spielen");
+        this.setState("g_Spielen");
         this.speed = 1;
         this.delay = 5000;
         this.lastShot=1;
@@ -33,7 +34,7 @@ public class attacking extends movedObject
     
     public void act(){
         super.act();
-        if(this.isstate("g_Spielen")){
+        if(this.isState("g_Spielen")){
             this.turntoplain();
             this.move(this.speed);
             java.util.List<Flugzeug> actors;
@@ -45,11 +46,14 @@ public class attacking extends movedObject
             this.touched();
             
         }
-        if(getstate().startsWith("g_")){
-            this.setstate("g_"+getWorld().menue.getSpielZustand());
+        if(getState().startsWith("g_")){
+            this.setState("g_"+getWorld().menue.getSpielZustand());
         }
     }
     
+    /**
+     * Überprüft, ob das Objekt von einem fremden Schuss berührt wird. Falls dies der Fall ist, wird das Objekt gelöscht und alle feindlichen, das Objekt berührnenden Schüsse gelöscht
+     */
     public void touched(){
         java.util.List<Shot> shots = getIntersectingObjects(Shot.class);
         boolean hit= false;
@@ -61,11 +65,14 @@ public class attacking extends movedObject
             if(hit){
                 this.setImage(exploded);
                 this.getWorld().removeObject(this);
-                this.setstate("dead");
+                this.setState("dead");
             }
         }
     }
     
+    /**
+     * Löst einen Schuss mit Position und Bewegungsrichtung des Objektes aus
+     */
     public void shoot(){
         if(this.lastShot==0){
             int[] position= this.getPosition();
@@ -74,6 +81,9 @@ public class attacking extends movedObject
         this.lastShot = (lastShot+1)%100;
     }
     
+    /**
+     * Speichert die Position relativ zum Spielerflugzeug in einer ArrayList und verwendet eine Vergangene Position relativ zum Flugzeug um sich in diese Richtung zu drehen
+     */
     public void turntoplain(){
         int plainx = getWorld().flugzeug.getX(); // stays always the same
         int plainy = getWorld().flugzeug.getY(); // stays always the same

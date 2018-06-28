@@ -1,12 +1,11 @@
 import greenfoot.*;
 
 /**
- * Write a description of class shot here.
+ * Ein Schuss der beispielsweise von Flugzeugen ausgelöst werdne kann und eine bestimmte Strecke in eine vorgegebene Richtung fliegt und sich dann selbst löscht
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Julius, Jonas
  */
-public class Shot extends movedObject
+public class Shot extends MovedObject
 {
     // instance variables - replace the example below with your own
     private int flew;
@@ -24,7 +23,7 @@ public class Shot extends movedObject
     {
         super(new String[] {"Explosion.png",},x,y);
         this.setRotation(rotation);
-        this.setstate("setup");
+        this.setState("setup");
         flew = 0;
         speed= 10;
         this.attacker= from;
@@ -33,23 +32,23 @@ public class Shot extends movedObject
     
     public void act(){
         super.act();
-        if(this.isstate("g_Spielen")){
+        if(this.isState("g_Spielen")){
             try{
                 this.move(speed);
             }catch(java.lang.NullPointerException error){
-                this.setstate("dead");
+                this.setState("dead");
             }
             flew += speed;
             if(flew > 500){
-                this.setstate("dead");
+                this.setState("dead");
                 getWorld().removeObject(this);
             }
-        }else if(this.isstate("setup")){
+        }else if(this.isState("setup")){
             this.move(100);
-            this.setstate("g_Spielen");
+            this.setState("g_Spielen");
         }
-        if(getstate().startsWith("g_")){
-            this.setstate("g_"+getWorld().menue.getSpielZustand());
+        if(getState().startsWith("g_")){
+            this.setState("g_"+getWorld().menue.getSpielZustand());
         }
     }
     
