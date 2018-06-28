@@ -26,6 +26,14 @@ public class Menue extends Actor
     int musikVolumen;
     int soundVolumen;
     boolean grafik;
+    int tode;
+    int abschuesse;
+    int verloren;
+    int gewonnen;
+    int heard;
+    int shield;
+    int speed;
+    String name;
 
     int LEVELANZAHL;
     int SKINANZAHL;
@@ -35,8 +43,17 @@ public class Menue extends Actor
      */
     public Menue(){
         spielZustand = "NamenWaehlen";
+        
         skin = 1;
         level = 1;
+        
+        tode = 0;
+        abschuesse = 0;
+        verloren = 0;
+        gewonnen = 0;
+        heard = 0;
+        shield = 0;
+        speed = 0;
 
         musikVolumen = 99;
         soundVolumen = 99;
@@ -213,11 +230,115 @@ public class Menue extends Actor
     public void setGrafik(boolean g){
         grafik = g;
     }
-
     /**
-     * Getter zu erfahren ob sich der Propeller dreht.
+     * Getter um zu erfahren ob sich der Propeller dreht.
      */
     public boolean getGrafik(){
         return grafik;
+    }
+    
+    /**
+     * Fügt einen Tod zu dem Counter der die tode zählt hinzu.
+     */
+    public void todePlus(){
+        tode++;
+    }
+    /**
+     * Getter um die Anzahl der Tode zu erfahren.
+     */
+    public int getTode(){
+        return tode;
+    }
+    
+    /**
+     * Fügt einen Abschüss zu dem Counter der die Abschusse zählt hinzu.
+     */
+    public void abschuessePlus(){
+        abschuesse++;
+    }
+    /**
+     * Getter um die Anzahl der Abschüsse zu erfahren.
+     */
+    public int getAbschuesse(){
+        return abschuesse;
+    }
+    
+    /**
+     * Fügt eine verlore Runde zu dem Counter der die tode zählt hinzu.
+     */
+    public void verlorenPlus(){
+        verloren++;
+    }
+    /**
+     * Getter um die Anzahl der verloren Runden zu erfahren.
+     */
+    public int getVerloren(){
+        return verloren;
+    }
+    
+    /**
+     * Fügt einen Abschuss zu dem Counter der die gewonnen Runden zählt hinzu.
+     */
+    public void gewonnenPlus(){
+        gewonnen++;
+    }
+    /**
+     * Getter um die Anzahl der gewonnen Runden zu erfahren.
+     */
+    public int getGewonnen(){
+        return gewonnen;
+    }
+    
+    
+    /**
+     * Fügt einen Herz zu dem Counter der die eingesammelten Herzen zählt hinzu.
+     */
+    public void herzPlus(){
+        heard++;
+    }
+    /**
+     * Getter um die Anzahl der eingesammelten Herzen zu erfahren.
+     */
+    public int getHerz(){
+        return heard;
+    }
+    
+    /**
+     * Fügt einen Schilder zu dem Counter der die eingesammelten Schilder zählt hinzu.
+     */
+    public void schildPlus(){
+        shield++;
+    }
+    /**
+     * Getter um die Anzahl der eingesammelten Schilder zu erfahren.
+     */
+    public int getSchild(){
+        return shield;
+    }
+    
+    /**
+     * Fügt einen Schnelligkeit zu dem Counter der die eingesammelten Schnelligkeiten zählt hinzu.
+     */
+    public void schnelligkeitPlus(){
+        speed++;
+    }
+    /**
+     * Getter um die Anzahl der eingesammelten Schilder zu erfahren.
+     */
+    public int getSchnelligkeit(){
+        return speed;
+    }
+
+    /**
+     * Setter der den Name festlegt.
+     */
+    public void setName(String n){
+        name = n;
+    }
+    /**
+     * Getter um den Namen zu erfahren.
+     */
+    public String getName(){
+        return name;
     }
 }

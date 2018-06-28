@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Flugzeug extends Actor
 {
-    int GESCHWINDIGKEIT;
     
     Menue menue;
     LebensAnzeige lebensAnzeige;
@@ -82,6 +81,7 @@ public class Flugzeug extends Actor
         }
         this.lastshot = (lastshot+1)%13;
     }
+
     
     /**
      * Legt die steuerung von Flugzeug fest um es zu bewegen.
@@ -103,13 +103,6 @@ public class Flugzeug extends Actor
         if(Greenfoot.isKeyDown("s")){
             //Objekt Bombe Spawnen
         }
-    }
-    
-    /**
-     * Getter der es ermöglicht die Geschwindigkeit des Flugzeugs zu erfahren. 
-     */
-    public int getGeschwindigkeit(){
-        return GESCHWINDIGKEIT;
     }
     
     /**

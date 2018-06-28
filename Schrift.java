@@ -17,15 +17,18 @@ public class Schrift extends Actor
     int buchstaben;
     int counter;
     boolean strich;
+    String schriftName;
     
     int BLINKEN;
     int MAXBUCHSTABEN;
     /**
      * Konstruktor der Klasse Schrift
      * @param m Referenz aufs Menue
+     * @param s Funktion/Name des Textfeldes
      */
-    public Schrift(Menue m){
+    public Schrift(Menue m, String s){
         menue = m;
+        schriftName = s;
         
         textAnzeigen("|", 55);
          
@@ -46,22 +49,78 @@ public class Schrift extends Actor
     {
         if(menue.getSpielZustand().equals("NamenWaehlen")){
             nameEingeben();
+            menue.setName(name);
         }
         if(menue.getSpielZustand().equals("Menue")){
             levelAnzeigen(40);
         }
         if(menue.getSpielZustand().equals("Einstellungen")){
-            if(getY() == 239){
+            if(schriftName.equals("Musik")){
                 textAnzeigen(menue.getMusikVolumen() + "", 50);
             }
-            if(getY() == 386){
+            if(schriftName.equals("Sound")){
                 textAnzeigen(menue.getSoundVolumen() + "", 50);
             }
         }
         if(menue.getSpielZustand().equals("Spielen")){
             warnungAnzeigen(30);
         }
-    }    
+        if(menue.getSpielZustand().equals("Profil")){
+            if(schriftName.equals("Name")){
+                textAnzeigen(menue.getName(), 40);
+            }
+            if(schriftName.equals("Deaths")){
+                textAnzeigen("" + menue.getTode(), 40);
+            }
+            if(schriftName.equals("Kills")){
+                textAnzeigen("" + menue.getAbschuesse(), 40);
+            }
+            if(schriftName.equals("Lost")){
+                textAnzeigen("" + menue.getVerloren(), 40);
+            }
+            if(schriftName.equals("Won")){
+                textAnzeigen("" + menue.getGewonnen(), 40);
+            }
+            if(schriftName.equals("K/D")){
+                if(menue.getTode() != 0){
+                    textAnzeigen("" + (double)(menue.getAbschuesse())/(double)(menue.getTode()), 40);
+                }
+                else{
+                    if(menue.getAbschuesse() != 0){
+                        textAnzeigen("" + menue.getAbschuesse() + ".0", 40);
+                    }
+                    else{
+                        textAnzeigen("0.0", 40);
+                    }
+                }
+            }
+            if(schriftName.equals("W/L")){
+                if(menue.getVerloren() != 0){
+                    textAnzeigen("" + (double)(menue.getGewonnen())/(double)(menue.getVerloren()), 40);
+                }
+                else{
+                    if(menue.getGewonnen() != 0){
+                        textAnzeigen("" + menue.getGewonnen() + ".0", 40);
+                    }
+                    else{
+                        textAnzeigen("0.0", 40);
+                    }
+                }
+            }
+            if(schriftName.equals("Shield")){
+                textAnzeigen("" + menue.getSchild(), 40);
+            }
+            if(schriftName.equals("Speed")){
+                textAnzeigen("" + menue.getSchnelligkeit(), 40);
+            }
+            if(schriftName.equals("Heard")){
+                textAnzeigen("" + menue.getHerz(), 40);
+            }
+            if(schriftName.equals("Items")){
+                textAnzeigen("" + (menue.getHerz() + menue.getSchnelligkeit() + menue.getSchild()), 40);
+            }
+        }    
+    }
     
     /**
      * Mit dieser Methode lässt sich ein belibiger Text in einer belibiegen Größen anzeigen.
@@ -156,5 +215,12 @@ public class Schrift extends Actor
         else{
             textAnzeigen(name + "|", 55);
         }
+    }
+    
+    /**
+     * Getter um den Namen zu erfahren.
+     */
+    public String getName(){
+        return name;
     }
 }

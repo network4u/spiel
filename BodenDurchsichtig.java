@@ -13,6 +13,8 @@ public class BodenDurchsichtig extends Actor
     BodenRot bodenRot;
     Flugzeug flugzeugSpieler;
     Menue menue;
+    
+    int geschwindigkeit;
     /**
      * Konstruktor der Klasse BodenDurchsichtig
      * @param b Referenz aufs den Boden (Grafik der Welt)
@@ -25,6 +27,7 @@ public class BodenDurchsichtig extends Actor
         bodenRot = br;
         flugzeugSpieler = f;
         menue = m;
+        geschwindigkeit = 3;
     }
     
      /**
@@ -35,7 +38,7 @@ public class BodenDurchsichtig extends Actor
     {
         bodenFolgt();
         if(menue.getSpielZustand().equals("Spielen")){
-            bewegen(flugzeugSpieler.getGeschwindigkeit());
+            bewegen(geschwindigkeit);
         }
     }  
     
@@ -55,5 +58,18 @@ public class BodenDurchsichtig extends Actor
     public void bodenFolgt(){
         boden.setLocation(getX(), getY());
         bodenRot.setLocation(getX(), getY());
+    }
+    
+    /**
+     * Getter der es ermöglicht die Geschwindigkeit des Flugzeugs zu erfahren. 
+     */
+    public int getGeschwindigkeit(){
+        return geschwindigkeit;
+    }
+    /**
+     * Setter der es ermöglicht die Geschwindigkeit des Flugzeugs zu setzen. 
+     */
+    public void setGeschwindigkeit(int v){
+        geschwindigkeit = v;
     }
 }
