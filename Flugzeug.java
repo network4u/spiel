@@ -12,6 +12,7 @@ public class Flugzeug extends Actor
     
     Menue menue;
     LebensAnzeige lebensAnzeige;
+    int lastshot;
     /**
      * Konstruktor der Klasse Flugzeug
      * @param l Referenz auf die Lebensanzeige
@@ -20,7 +21,7 @@ public class Flugzeug extends Actor
     public Flugzeug(LebensAnzeige l, Menue m){
         menue = m;
         lebensAnzeige = l;
-        
+        lastshot=1;
         GESCHWINDIGKEIT = 2;
     }
     
@@ -49,15 +50,38 @@ public class Flugzeug extends Actor
 
         menue.hintergrundmusik();
         
-        if(getOneIntersectingObject(shot.class)!=null){
-            removeTouching(shot.class);
-            lebensAnzeige.lebenAbziehen();
-        }
+        touched();
         
         if(menue.getSpielZustand().equals("Verloren")){
             menue.explosionsGeraeusch();
         }
-    }    
+    }
+    
+
+    public void touched(){
+        java.util.List<shot> shots = getIntersectingObjects(shot.class);
+        boolean hit= false;
+        for(int i=0; i<shots.size();i++){
+            if(!shots.get(i).isFrom((Actor) this)){
+                getWorld().removeObject((Actor)shots.get(i));
+                hit = true;
+            }
+            if(hit){
+                lebensAnzeige.lebenAbziehen();
+            }
+        }
+    }
+    
+    
+    public void shoot(){
+        if(this.lastshot==0){
+            int relX= this.getX() - getWorldOfType(Welt.class).bodenDurchsichtig.getX();
+            int relY= this.getY() - getWorldOfType(Welt.class).bodenDurchsichtig.getY();
+            int[] posInt= new int[] {relX,relY};
+            getWorldOfType(Welt.class).newshot(posInt,this.getRotation(),this);
+        }
+        this.lastshot = (lastshot+1)%13;
+    }
     
     /**
      * Legt die steuerung von Flugzeug fest um es zu bewegen.
@@ -73,8 +97,7 @@ public class Flugzeug extends Actor
         }
          //schießen
         if(Greenfoot.isKeyDown("w")){
-            menue.schussGeraeusch();
-            //Objekt Schuss Spawen
+            shoot();
         }
         //Bombe abwerfen
         if(Greenfoot.isKeyDown("s")){

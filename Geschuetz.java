@@ -10,6 +10,7 @@ public class Geschuetz extends Actor
 {
     Boot boot;
     Flugzeug flugzeug;
+    private int lastshot;
     /**
      * Konstruktor der Klasse Boden
      * @param b Referenz aufs Boot
@@ -18,6 +19,7 @@ public class Geschuetz extends Actor
     public Geschuetz(Boot b, Flugzeug f){
         boot = b;
         flugzeug = f;
+        lastshot=1;
     }
     
      /**
@@ -28,7 +30,19 @@ public class Geschuetz extends Actor
     {
          folgtBoot();
          turnTowards(flugzeug.getX(), flugzeug.getY());
+         shoot();
     }  
+    
+    
+    public void shoot(){
+        if(this.lastshot==0){
+            Welt welt = this.getWorldOfType(Welt.class);
+            int [] posList= new int[]{this.getX()-welt.bodenDurchsichtig.getX(),this.getY()-welt.bodenDurchsichtig.getY()};
+            welt.newshot(posList,this.getRotation(),this);
+        }
+        this.lastshot = (lastshot+1)%300;
+    }
+    
     
     /**
      * Sorgt dafür, dass das Geschütz an der Richtigen stelle vom Boot ist.

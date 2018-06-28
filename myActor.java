@@ -2,8 +2,7 @@ import greenfoot.*;
 /**
  * Write a description of class myActor here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Julius
  */
 public class myActor extends Actor
 {
@@ -36,5 +35,9 @@ public class myActor extends Actor
     
     public Welt getWorld(){
         return getWorldOfType(Welt.class);
+    }
+    
+    public java.util.List <Actor> getIntersectingObjects2(java.lang.Class<Actor> cls){
+        return super.getIntersectingObjects(cls);
     }
 }

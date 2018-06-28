@@ -44,7 +44,7 @@ public class Boot extends Actor
      */
     public void act() 
     {
-        setLocation(bodenDurchsichtig.getX() + xPosition,
+        super.setLocation(bodenDurchsichtig.getX() + xPosition,
         bodenDurchsichtig.getY() + yPosition);
         
         if(getOneIntersectingObject(Flugzeug.class)!= null
@@ -70,5 +70,20 @@ public class Boot extends Actor
      */
     public Welt welt(){
         return getWorldOfType(Welt.class);
+    }
+    
+    /**
+     * Überschreibt die Position des Bootes in der Bootklasse und setzt sie in der ActorKlasse
+     * @ param x neue X-Position
+     * @ param y neue Y-Position
+     */
+    public void setLocation2(int x, int y){
+        this.setLocation(x,y);
+        this.xPosition=x;
+        this.yPosition=y;
+    }
+    
+    public java.util.List <Actor> getIntersectingObjects2(java.lang.Class<Actor> cls){
+        return super.getIntersectingObjects(cls);
     }
 }

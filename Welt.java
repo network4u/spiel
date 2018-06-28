@@ -6,11 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (Jonas Wischeropp, Julius Schreiber) 
  * @version (5.Mai.2018)
  */
+
+
 public class Welt extends World
 {
     Menue menue = new Menue();
     LebensAnzeige lebensAnzeige = new LebensAnzeige(menue);
-    Flugzeug flugzeug = new Flugzeug(lebensAnzeige, menue);
+    public Flugzeug flugzeug = new Flugzeug(lebensAnzeige, menue);
     Propeller propeller = new Propeller(flugzeug, menue);
     Boden boden = new Boden();
     BodenRot bodenRot = new BodenRot(boden);
@@ -157,7 +159,6 @@ public class Welt extends World
         addObject(lebensAnzeige, 800, 40);
 
         levelErstellen();
-        addObject(new attacking(getWidth()/4, getHeight()/4), getWidth()/4, getHeight()/4);
 
         menue.setSpielZustand("Spielen");
     }
@@ -251,21 +252,8 @@ public class Welt extends World
         menueErstellen();
     }
 
-    /**
-     * Erstellt ein Boot mit einem Geschütz
-     * (kann immer im rechten Wnkel ausgerichtet werden).
-     * @param x x-Positon
-     * @param y y-Positon
-     * @param r Ausrichtung des Bootes (möglich: 0, 90, 180, 270)
-     */
-    public void bootErstellen(int x, int y, int r){
-        boot = new Boot(x, y, r, menue, bodenDurchsichtig);
-        geschuetz = new Geschuetz(boot, flugzeug);
-        bootListe.add(boot);
-        geschuetzListe.add(geschuetz);
-        addObject(boot, x, y);
-        addObject(geschuetz, x, y);
-    }
+
+    
 
     /**
      * Löscht alle Gegner (Boote und Flugzeuge).
@@ -332,8 +320,18 @@ public class Welt extends World
         menue.setSpielZustand("Profil");
     }
 
-    public void newshot(int[] apos, int rotation, Actor from){
-        shot make= new shot(apos,rotation,from);
+    /**
+     * Erstellt einen neuen Schuss in der Welt
+     * @param x Der X-Wert der Position, in der der Schuss erstellt werden soll
+     * @param y Der Y-Wert der Position, in der der Schuss erstellt werden soll
+     * @param rotation Die Flugrichtung des Schusses
+     * @param from Referenz auf das Objekt, das die Erstellung des Schusses in Auftrag gegeben hat
+     */
+    
+    public void newShot(int x, int y, int rotation, Actor from){
+        
+        menue.schussGeraeusch();
+        shot make= new Shot(x,y,rotation,from);
         int[] position = make.getPosition();
         shots.add(make);
         addObject(make, position[0], position[1]);
@@ -350,25 +348,43 @@ public class Welt extends World
         tastenListe.add(tasten);
         addObject(tasten, x, y);
     }
-
+    
+    
+    /**
+     * Erstellt je so viele Flugzeuge und Boote wie die Levelanzahl hoch ist
+     */
     public void levelErstellen(){
-        int randomRotation = 0;
-        int randomNumber = Greenfoot.getRandomNumber(3);
-        if(randomNumber == 0){
-            randomRotation = 0;
+        
+
+        for(int i = 0; i < menue.getLevel();i++){
+            attacking neuer= new attacking(1,2);
+            this.addObject(neuer,1,2);
+            do{
+                int ranx= Greenfoot.getRandomNumber(1000);
+                int rany= Greenfoot.getRandomNumber(1000);
+                neuer.setLocation2(ranx,rany);
+            }while(neuer.getIntersectingObjects2(Actor.class).size()!=2);
+            
         }
-        if(randomNumber == 1){
-            randomRotation = 90;
+        
+        for(int i = 0; i < menue.getLevel();i++){
+            int ranRotation = Greenfoot.getRandomNumber(3)*90;
+            Boot neuer= new Boot(1, 2, ranRotation, menue, bodenDurchsichtig);
+            bootListe.add(neuer);
+            this.addObject(neuer,1,2);
+            int ranx;
+            int rany;
+            do{
+                ranx= Greenfoot.getRandomNumber(1000);
+                rany= Greenfoot.getRandomNumber(1000);
+                neuer.setLocation2(ranx,rany);
+            }while(neuer.getIntersectingObjects2(Actor.class).size()!=2);
+            
+            Geschuetz geschuetz = new Geschuetz(neuer, flugzeug);
+            geschuetzListe.add(geschuetz);
+            this.addObject(geschuetz, ranx, rany);
         }
-        if(randomNumber == 2){
-            randomRotation = 180;
-        }
-        if(randomNumber == 3){
-            randomRotation = 270;
-        }
-        for(int i=0; i < menue.getLevel(); i++){
-            bootErstellen(Greenfoot.getRandomNumber(2650)-867,
-                Greenfoot.getRandomNumber(1746)-578, randomRotation);
-        }
+        
+        
     }
 }

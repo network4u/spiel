@@ -12,7 +12,7 @@ public class attacking extends movedObject
     private int delay;
     private String exploded;
     private Flugzeug flugzeug;
-    private int lastshot;
+    private int lastShot;
     private java.util.ArrayList<int[]> turnto;
     /**
      * Constructor for objects of class movedObject
@@ -20,11 +20,11 @@ public class attacking extends movedObject
     public attacking(int nx,int ny)
     {
         super(new String[] {"FlugzeugGegner1.png","FlugzeugGegner2.png","FlugzeugGegner3.png","FlugzeugGegner4.png","FlugzeugGegner5.png"},nx,ny);
-        exploded="Explosion.png";
+        this.exploded="Explosion.png";
         this.setstate("g_Spielen");
         this.speed = 1;
         this.delay = 5000;
-        this.lastshot=1;
+        this.lastShot=1;
         this.turnto= new java.util.ArrayList<int []>();
         for( int i=0; i<50;i++){
             turnto.add(new int[] {0,0});
@@ -41,8 +41,8 @@ public class attacking extends movedObject
             if(actors.size()!=0){
                 this.shoot();
             }
-            java.util.List<shot> s = getIntersectingObjects(shot.class);
-            this.touched(s);
+            
+            this.touched();
             
         }
         if(getstate().startsWith("g_")){
@@ -50,7 +50,8 @@ public class attacking extends movedObject
         }
     }
     
-    public void touched(java.util.List<shot> shots){
+    public void touched(){
+        java.util.List<Shot> shots = getIntersectingObjects(Shot.class);
         boolean hit= false;
         for(int i=0; i<shots.size();i++){
             if(!shots.get(i).isFrom((Actor) this)){
@@ -58,18 +59,19 @@ public class attacking extends movedObject
                 hit = true;
             }
             if(hit){
-                setImage(exploded);
-                getWorld().removeObject(this);
+                this.setImage(exploded);
+                this.getWorld().removeObject(this);
                 this.setstate("dead");
             }
         }
     }
     
     public void shoot(){
-        if(this.lastshot==0){
-            getWorld().newshot(this.getPosition(),this.getRotation(),this);
+        if(this.lastShot==0){
+            int[] position= this.getPosition();
+            getWorld().newShot(position[0], position[1],this.getRotation(),this);
         }
-        this.lastshot = (lastshot+1)%100;
+        this.lastShot = (lastShot+1)%100;
     }
     
     public void turntoplain(){
