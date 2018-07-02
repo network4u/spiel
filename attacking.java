@@ -10,7 +10,6 @@ public class attacking extends MovedObject
     private int speed;
     private int delay;
     private String exploded;
-    private Flugzeug flugzeug;
     private int lastShot;
     private java.util.ArrayList<int[]> turnto;
     /**
