@@ -21,7 +21,7 @@ public class Shot extends MovedObject
      */
     public Shot(int x, int y, int rotation, Actor from)
     {
-        super(new String[] {"Explosion.png",},x,y);
+        super(new String[] {"Schuss.png",},x,y);
         this.setRotation(rotation);
         this.setState("setup");
         flew = 0;

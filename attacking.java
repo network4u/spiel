@@ -23,10 +23,10 @@ public class attacking extends MovedObject
         this.exploded="Explosion.png";
         this.setState("g_Spielen");
         this.speed = 1;
-        this.delay = 5000;
+        this.delay = 50;
         this.lastShot=1;
         this.turnto= new java.util.ArrayList<int []>();
-        for( int i=0; i<50;i++){
+        for( int i=0; i<this.delay;i++){
             turnto.add(new int[] {0,0});
         }
     }
@@ -37,7 +37,7 @@ public class attacking extends MovedObject
             this.turntoplain();
             this.move(this.speed);
             java.util.List<Flugzeug> actors;
-            actors= this.getObjectsInRange(1000,Flugzeug.class);
+            actors= this.getObjectsInRange(600,Flugzeug.class);
             if(actors.size()!=0){
                 this.shoot();
             }
